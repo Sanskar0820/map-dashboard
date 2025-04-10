@@ -11,15 +11,18 @@ const App = () => {
 
         if (data?.type === 'SET_LANGUAGE' && data?.lang) {
           console.log('Language received from app:', data.lang);
+          localStorage.setItem('i18nextLng', data.lang); // Optional
           i18n.changeLanguage(data.lang);
         }
+        
       } catch (err) {
         console.error('Invalid message format', err);
       }
     };
 
     window.addEventListener('message', handleMessage);
-
+    document.addEventListener('message', handleMessage);
+    
     return () => {
       window.removeEventListener('message', handleMessage);
     };
