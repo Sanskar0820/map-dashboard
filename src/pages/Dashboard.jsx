@@ -22,7 +22,7 @@ import { AnnualData } from '../assets/data/AnnualData.jsx';
 import { ExtremesConditionsData } from '../assets/data/ExtremesConditionsData';
 import { ClimatologyData } from '../assets/data/ClimatologyData';
 
-
+import { useTranslation } from 'react-i18next';
 
 const MapDatasetOptions = [
   {
@@ -115,7 +115,7 @@ const Dashboard = () => {
   const [selectedMapData, setSelectedMapData] = useState(null);
   const [selectedVariable, setSelectedVariable] = useState(null);
 
-
+  const { t } = useTranslation();
 
 
   const handleSelectMapData = (e) => {
@@ -270,26 +270,26 @@ const Dashboard = () => {
           <div className="left_panel_container">
             <div className='border border-secondary p-2 mb-2'>
 
-              <label className=''>Select district</label>
+              <label className=''>{t('data.select_district')}</label>
               <select className="form-select mb-3"
                 value={selectedDistrict ? selectedDistrict : ''}
                 onChange={handleDistrictSelect}>
-                <option value="">Select</option>
+                <option value="">{t('data.select_placeholder')}</option>
                 {[...new Set(PlaceAttributes.map((item) => item.DISTRICT))].map((item, index) =>
-                  <option key={index} value={item}>{item}</option>
+                  <option key={index} value={item}>{t(`location.${item}`)}</option>
                 )}
               </select>
 
 
 
-              <label className='mt-3'>Select taluka</label>
+              <label className='mt-3'>{t('data.select_block')}</label>
               <select className="form-select mb-2"
                 value={selectedTehsil ? selectedTehsil : ''}
                 disabled={tehsilList.length === 0}
                 onChange={handleTehsilSelect} >
-                <option value="">Select</option>
+                <option value="">{t('data.select_placeholder')}</option>
                 {[...new Set(tehsilList.map((item) => item.TEHSIL))].map((item, index) =>
-                  <option key={index} value={item}>{item}</option>
+                  <option key={index} value={item}>{t(`location.${item}`)}</option>
                 )}
               </select>
 
@@ -298,7 +298,7 @@ const Dashboard = () => {
             <div className='border border-secondary p-2 mb-2'>
 
 
-              <label className=''>Select data</label>
+            <label className=''>{t('dashboard.select_data')}</label>
 
               <select className="form-select mb-3"
 
@@ -306,14 +306,14 @@ const Dashboard = () => {
                 onChange={handleSelectMapData}
                 disabled={tehsilSelectedItem.length === 0}
               >
-                <option value="">Select</option>
+                <option value="">{t('data.select_placeholder')}</option>
                 {MapDatasetOptions.map((item, index) => (
-                  <option key={index} value={item.DataValue}>{item.DataName}</option>
+                  <option key={index} value={item.DataValue}>{t(`dashboard.${item.DataName}`)}</option>
                 ))}
               </select>
 
 
-              <label className=''>Select parameter</label>
+              <label className=''>{t('dashboard.select_parameter')}</label>
               <select
                 className="form-select mb-3"
                 value={selectedVariable ? selectedVariable.DataValue : ''}
@@ -321,10 +321,10 @@ const Dashboard = () => {
 
                 disabled={!selectedMapData}
               >
-                <option value="">Select</option>
+                <option value="">{t('data.select_placeholder')}</option>
                 {selectedMapData && selectedMapData.variables.map((variable, index) => (
                   <option key={index} value={variable.value}>
-                    {variable.name}
+                    {t(`dashboard.${variable.name}`)}
                   </option>
                 ))}
               </select>
@@ -369,7 +369,7 @@ const Dashboard = () => {
               <button type='button'
                 disabled={!tehsilSelectedItem}
                 onClick={handleShowTimeseries}>
-                {showTimeseries ? "Hide Timeseries" : "Show Timeseries"}
+                {showTimeseries ? t('dashboard.hide_timeseries') : t('dashboard.show_timeseries')}
               </button>
             </div>
 

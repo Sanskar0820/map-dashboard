@@ -2,15 +2,16 @@ import React from 'react';
 import Plot from 'react-plotly.js';
 import { IoMdClose } from "react-icons/io";
 import { daysInYear } from '../helpers/functions.jsx';
+import { useTranslation } from 'react-i18next';
 
 const ClimatologyTimeSeriesChart = ({ handleShowTimeseries, selectedDistrict, selectedTehsil, selectedMapData, selectedTehsilID, selectedVariable }) => {
     const filteredData = selectedMapData.Data.find(item => item.ID === selectedTehsilID);
-
+    const { t } = useTranslation();
     return (
         <>
             <div className='timeseries_heading'>
                 <h4>
-                    {selectedDistrict} - {selectedTehsil}<br />
+                {t(`location.${selectedDistrict}`)} - {t(`location.${selectedTehsil}`)}<br />
                     {/* {selectedVariable.name} ({selectedVariable.unit}) */}
                 </h4>
                 <button className='chart_close_btn' onClick={handleShowTimeseries}><IoMdClose /></button>

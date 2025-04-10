@@ -2,11 +2,12 @@ import React from 'react';
 import Plot from 'react-plotly.js';
 import { IoMdClose } from "react-icons/io";
 import { yearsArray } from '../helpers/functions.jsx';
+import { useTranslation } from 'react-i18next';
 
 const ExtremesConditionsCharts = ({ handleShowTimeseries, selectedDistrict, selectedTehsil, selectedMapData, selectedTehsilID, selectedVariable, startYear, endYear }) => {
 
     const filteredData = selectedMapData.Data.find(item => item.ID === selectedTehsilID);
-
+    const { t } = useTranslation();
 
     // const startYearIndex = parseInt(startYear, 10);
     // const endYearIndex = parseInt(endYear, 10);
@@ -33,7 +34,7 @@ const ExtremesConditionsCharts = ({ handleShowTimeseries, selectedDistrict, sele
         <>
             <div className='timeseries_heading'>
                 <h4>
-                    {selectedDistrict} - {selectedTehsil}<br />
+                {t(`location.${selectedDistrict}`)} - {t(`location.${selectedTehsil}`)}<br />
                     {/* {selectedVariable.name} ({selectedVariable.unit}) */}
                 </h4>
 
